@@ -1,0 +1,97 @@
+.schedule-block {
+  position: absolute;
+  height: 38px;
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: grab;
+  user-select: none;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease, opacity 0.15s ease;
+  overflow: hidden;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid;
+}
+
+.schedule-block.not-first {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-style: dashed;
+}
+
+.schedule-block.not-last {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-style: dashed;
+}
+
+.schedule-block.dragging {
+  cursor: grabbing;
+  z-index: 100;
+  opacity: 0.8;
+  box-shadow: var(--shadow-hover);
+}
+
+.schedule-block.hovered {
+  z-index: 50;
+  box-shadow: var(--shadow-md);
+  opacity: 0.95;
+}
+
+.block-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.block-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.block-category {
+  font-size: 9px;
+  opacity: 0.85;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  cursor: col-resize;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.schedule-block:hover .resize-handle {
+  opacity: 1;
+}
+
+.resize-handle.left {
+  left: 0;
+}
+
+.resize-handle.right {
+  right: 0;
+}
+
+.resize-handle::after {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background-color: currentColor;
+  border-radius: 2px;
+  opacity: 0.5;
+}
