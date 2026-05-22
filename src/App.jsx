@@ -7,7 +7,17 @@ import './App.css';
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [schedulesByDate, setSchedulesByDate] = useState({});
+  const [schedulesByDate, setSchedulesByDate] = useState(() => {
+    const saved = localStorage.getItem('plan_schedules');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        return {};
+      }
+    }
+    return {};
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [hoveredCell, setHoveredCell] = useState(null);
@@ -24,6 +34,10 @@ function App() {
       return { ...prev, [dateKey]: updated };
     });
   };
+
+  useEffect(() => {
+    localStorage.setItem('plan_schedules', JSON.stringify(schedulesByDate));
+  }, [schedulesByDate]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
